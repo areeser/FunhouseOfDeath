@@ -20,7 +20,7 @@ public class CameraMovement : MonoBehaviour {
     void Update()
     {
         playerPos = cam.WorldToScreenPoint(GameObject.FindGameObjectWithTag("Player").transform.position);
-        if (playerPos.x > 520) {
+        if (playerPos.x > cam.pixelWidth - 1) {
             if (canChange) {
                 points++;
             }
