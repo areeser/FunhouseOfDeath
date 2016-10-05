@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
     public float speed = 10.0f;
@@ -41,7 +42,11 @@ public class PlayerMovement : MonoBehaviour {
         if (colliInfo.gameObject.tag == "Trampoline") {
             touchingGround = false;
             trampJump = true;
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, bounceForce), ForceMode2D.Force);
+        }
+        if (colliInfo.gameObject.tag == "Enemy") {
+            SceneManager.LoadScene("GameOver");
         }
     }
 
