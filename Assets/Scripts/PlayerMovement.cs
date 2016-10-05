@@ -5,6 +5,7 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 10.0f;
     public float jumpForce = 10.0f;
     public float bounceForce = 1000.0f;
+    public static bool trampJump = false;
     public static bool touchingGround;
     public static bool facingRight = true;
     public Collision2D ColliInfo;
@@ -29,17 +30,24 @@ public class PlayerMovement : MonoBehaviour {
         }
         else if (Input.GetKeyDown(KeyCode.Space)) {
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
-            touchingGround = false;
         }
         vect = gameObject.GetComponent<Rigidbody2D>().velocity;
     }
     void OnCollisionEnter2D(Collision2D colliInfo) {
         if (colliInfo.gameObject.tag == "Ground") {
             touchingGround = true;
+            trampJump = false;
         }
         if (colliInfo.gameObject.tag == "Trampoline") {
             touchingGround = false;
+            trampJump = true;
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, bounceForce), ForceMode2D.Force);
+        }
+    }
+
+    void OnCollisionExit2D(Collision2D colliInfo) {
+        if (colliInfo.gameObject.tag == "Ground") {
+            touchingGround = false;
         }
     }
 }
