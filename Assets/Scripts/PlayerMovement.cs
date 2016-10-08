@@ -11,20 +11,31 @@ public class PlayerMovement : MonoBehaviour {
     public static bool facingRight = true;
     public Collision2D ColliInfo;
     public Vector2 vect;
+    public Vector2 playerPosition;
+    public double mousePos;
+    Camera cam;
 	// Use this for initialization
 	void Start () {
         touchingGround = true;
+        cam = GameObject.Find("Camera").GetComponent<Camera>();
     }
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetKey(KeyCode.RightArrow)) {
-            gameObject.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));
+        playerPosition = cam.WorldToViewportPoint(GameObject.FindGameObjectWithTag("Player").transform.position);
+        mousePos = Input.mousePosition.x / cam.pixelWidth;
+
+        if (playerPosition.x - mousePos >= 0) {
+            facingRight = false;
+        } else if (playerPosition.x - mousePos < 0) {
             facingRight = true;
         }
+
+        if (Input.GetKey(KeyCode.RightArrow)) {
+            gameObject.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));          
+        }
         else if (Input.GetKey(KeyCode.LeftArrow)) {
-            gameObject.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
-            facingRight = false;
+            gameObject.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));            
         }
         if (!(touchingGround)) {
             OnCollisionEnter2D(ColliInfo);
