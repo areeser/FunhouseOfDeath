@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     public float bounceForce = 1000.0f;
     public static bool trampJump = false;
     public static bool touchingGround;
-    public static bool facingRight = true;
+    public static bool facingRight;
     public Collision2D ColliInfo;
     public Vector2 vect;
     public Vector2 playerPosition;
@@ -31,10 +31,10 @@ public class PlayerMovement : MonoBehaviour {
             facingRight = true;
         }
 
-        if (Input.GetKey(KeyCode.RightArrow)) {
+        if (Input.GetKey(KeyCode.D)) {
             gameObject.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));          
         }
-        else if (Input.GetKey(KeyCode.LeftArrow)) {
+        else if (Input.GetKey(KeyCode.A)) {
             gameObject.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));            
         }
         if (!(touchingGround)) {
