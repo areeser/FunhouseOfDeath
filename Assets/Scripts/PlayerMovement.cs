@@ -31,16 +31,16 @@ public class PlayerMovement : MonoBehaviour {
             facingRight = true;
         }
 
-        if (Input.GetKey(KeyCode.RightArrow)) {
+        if (Input.GetKey(KeyCode.D)) {
             gameObject.transform.Translate(new Vector3(speed * Time.deltaTime, 0, 0));          
         }
-        else if (Input.GetKey(KeyCode.LeftArrow)) {
+        else if (Input.GetKey(KeyCode.A)) {
             gameObject.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));            
         }
         if (!(touchingGround)) {
             OnCollisionEnter2D(ColliInfo);
         }
-        else if (Input.GetKeyDown(KeyCode.Space)) {
+        else if (Input.GetKeyDown(KeyCode.W)) {
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
         }
         vect = gameObject.GetComponent<Rigidbody2D>().velocity;
@@ -55,6 +55,7 @@ public class PlayerMovement : MonoBehaviour {
             trampJump = true;
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, bounceForce), ForceMode2D.Force);
+            Destroy(GameObject.FindGameObjectWithTag("Trampoline"));
         }
         if (colliInfo.gameObject.tag == "Enemy") {
             SceneManager.LoadScene("GameOver");
