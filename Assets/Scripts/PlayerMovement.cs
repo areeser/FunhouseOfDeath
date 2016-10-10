@@ -8,7 +8,7 @@ public class PlayerMovement : MonoBehaviour {
     public float bounceForce = 1000.0f;
     public static bool trampJump = false;
     public static bool touchingGround;
-    public static bool facingRight = true;
+    public static bool facingRight;
     public Collision2D ColliInfo;
     public Vector2 vect;
     public Vector2 playerPosition;
