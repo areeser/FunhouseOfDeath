@@ -63,8 +63,10 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Scripts\AirBlast.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Respawn.cs" />
     <Compile Include="Assets\Scripts\ShootTrampoline.cs" />
     <Compile Include="Assets\Scripts\Trampoline.cs" />
   </ItemGroup>

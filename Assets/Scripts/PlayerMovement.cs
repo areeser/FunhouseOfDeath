@@ -40,7 +40,7 @@ public class PlayerMovement : MonoBehaviour {
         if (!(touchingGround)) {
             OnCollisionEnter2D(ColliInfo);
         }
-        else if (Input.GetKeyDown(KeyCode.W)) {
+        else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) {
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
         }
         vect = gameObject.GetComponent<Rigidbody2D>().velocity;
