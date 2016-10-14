@@ -6,6 +6,7 @@ public class PlayerMovement : MonoBehaviour {
     public float speed = 10.0f;
     public float jumpForce = 10.0f;
     public float bounceForce = 1000.0f;
+    public bool crushing = false; 
     public static bool trampJump = false;
     public static bool touchingGround;
     public static bool facingRight;
@@ -13,11 +14,11 @@ public class PlayerMovement : MonoBehaviour {
     public Vector2 vect;
     public Vector2 playerPosition;
     public double mousePos;
-    Camera cam;
+    public Camera cam;
 	// Use this for initialization
 	void Start () {
         touchingGround = true;
-        cam = GameObject.Find("Camera").GetComponent<Camera>();
+        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
     }
 	
 	// Update is called once per frame
@@ -38,15 +39,18 @@ public class PlayerMovement : MonoBehaviour {
             gameObject.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));            
         }
         if (!(touchingGround)) {
-            OnCollisionEnter2D(ColliInfo);
+            //OnCollisionEnter2D(ColliInfo);
         }
         else if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.Space)) {
             gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
         }
-        vect = gameObject.GetComponent<Rigidbody2D>().velocity;
+        //vect = gameObject.GetComponent<Rigidbody2D>().velocity;
     }
     void OnCollisionEnter2D(Collision2D colliInfo) {
         if (colliInfo.gameObject.tag == "Ground") {
+            if (crushing) {
+                SceneManager.LoadScene("GameOver");
+            }
             touchingGround = true;
             trampJump = false;
         }
@@ -60,11 +64,21 @@ public class PlayerMovement : MonoBehaviour {
         if (colliInfo.gameObject.tag == "Enemy") {
             SceneManager.LoadScene("GameOver");
         }
+        if (colliInfo.gameObject.tag == "Crush") {
+            crushing = true;
+            if (touchingGround) {
+                SceneManager.LoadScene("GameOver");
+            }
+        }
     }
 
     void OnCollisionExit2D(Collision2D colliInfo) {
         if (colliInfo.gameObject.tag == "Ground") {
             touchingGround = false;
+        }
+        if (colliInfo.gameObject.tag == "Crush")
+        {
+            crushing = false;
         }
     }
 }
