@@ -11,10 +11,10 @@ public class ShootTrampoline : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (Input.GetMouseButtonDown(0) && (!PlayerMovement.trampJump)) {
+        if (Input.GetMouseButtonDown(0) && (!gameObject.GetComponent<PlayerMovement>().trampJump)) {
             Destroy(GameObject.FindGameObjectWithTag("Trampoline"));
             Vector3 vect = gameObject.transform.position;
-            if (PlayerMovement.facingRight)
+            if (gameObject.GetComponent<PlayerMovement>().facingRight)
             {
                 vect += new Vector3(initPos, 0, 0);
             }

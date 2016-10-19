@@ -15,7 +15,7 @@ public class AirBlast : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        facingRight = PlayerMovement.facingRight;
+        facingRight = gameObject.GetComponent<PlayerMovement>().facingRight;
         if (!blast)
         {
             if (facingRight && Input.GetMouseButtonDown(1))

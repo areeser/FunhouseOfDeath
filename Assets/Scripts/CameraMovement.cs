@@ -17,7 +17,7 @@ public class CameraMovement : MonoBehaviour {
    
     // Use this for initialization
     void Start () {
-        cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        cam = gameObject.GetComponent<Camera>();
     }
 
     // Update is called once per frame

@@ -11,8 +11,10 @@ public class Respawn : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        if (Input.GetMouseButtonDown(0)) {
-            SceneManager.LoadScene("TestLevel");
-        }
+       
 	}
+
+    void OnMouseUpAsButton() {
+        GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ChangeScene(GameManager.scene);
+    }
 }
