@@ -33,7 +33,7 @@ public class AirBlast : MonoBehaviour {
             timer += Time.deltaTime;
             if (timer >= boostTime)
             {
-                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
+                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, gameObject.GetComponent<Rigidbody2D>().velocity.y);
                 blast = false;
                 timer = 0;
             }
