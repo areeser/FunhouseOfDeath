@@ -28,7 +28,7 @@ public class Balloon : MonoBehaviour {
             balloonOut = false;
         }
         if (balloonOut) {
-            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
+            gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(gameObject.GetComponent<Rigidbody2D>().velocity.x, 0.0f);
             gameObject.transform.Translate(new Vector3(0, speed*Time.deltaTime, 0));
         }
 

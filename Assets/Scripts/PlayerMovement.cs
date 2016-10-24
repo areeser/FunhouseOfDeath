@@ -84,6 +84,7 @@ public class PlayerMovement : MonoBehaviour {
                 SceneManager.LoadScene("GameOver");
             }
         }
+        gameObject.GetComponent<Balloon>().balloonOut = false;
     }
 
     void OnCollisionExit2D(Collision2D colliInfo) {
