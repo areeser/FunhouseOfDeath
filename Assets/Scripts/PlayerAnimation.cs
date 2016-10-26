@@ -4,12 +4,12 @@ using System;
 
 public class PlayerAnimation : MonoBehaviour {
     //	<Sprite Variables>
-    private Sprite[] playerAnimation = new Sprite[8];
-    private int playerSpriteAnimationPos = 0;
-    private int minSprite, maxSprite, prevMinSprite, prevMaxSprite;
+    public Sprite[] playerAnimation = new Sprite[8];
+    public int playerSpriteAnimationPos = 0;
+    public int minSprite, maxSprite, prevMinSprite, prevMaxSprite;
     public float delay = 0.1f;
-    private float timer = 0f;
-    private bool playerSpriteLoop = true;
+    public float timer = 0f;
+    public bool playerSpriteLoop = true;
     public GameObject playerSprite;
     //	</Sprite Variables>
 
@@ -103,7 +103,7 @@ public class PlayerAnimation : MonoBehaviour {
         {
             UpdateSpriteAnimation("RANGE 0,3|DELAY 0.1|LOOP|INCREMENT");
         }
-        else
+        else if (touchingGround)
         {
             UpdateSpriteAnimation("RESET");
         }

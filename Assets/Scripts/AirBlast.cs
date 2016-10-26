@@ -15,30 +15,35 @@ public class AirBlast : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-        facingRight = gameObject.GetComponent<PlayerMovement>().facingRight;
-        if (!blast)
+        if (LockPowers.AirBlastUnlocked)
         {
-            if (facingRight && Input.GetMouseButtonDown(1))
+            facingRight = gameObject.GetComponent<PlayerMovement>().facingRight;
+            if (!blast)
             {
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-airBlastForce, 0), ForceMode2D.Force);
-                blast = true;
+                if (facingRight && Input.GetMouseButtonDown(1))
+                {
+                    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-airBlastForce, 0), ForceMode2D.Force);
+                    blast = true;
+                }
+                else if (!facingRight && Input.GetMouseButtonDown(1))
+                {
+                    blast = true;
+                    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(airBlastForce, 0), ForceMode2D.Force);
+                }
             }
-            else if (!facingRight && Input.GetMouseButtonDown(1))
+            else
             {
-                blast = true;
-                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(airBlastForce, 0), ForceMode2D.Force);
-            }
-        }
-        else {
-            timer += Time.deltaTime;
-            if (timer >= boostTime)
-            {
-                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, gameObject.GetComponent<Rigidbody2D>().velocity.y);
-                blast = false;
-                timer = 0;
-            }
-            else if (Input.GetMouseButtonUp(1)) {
-                gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
+                timer += Time.deltaTime;
+                if (timer >= boostTime)
+                {
+                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, gameObject.GetComponent<Rigidbody2D>().velocity.y);
+                    blast = false;
+                    timer = 0;
+                }
+                else if (Input.GetMouseButtonUp(1))
+                {
+                    gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
+                }
             }
         }
     }

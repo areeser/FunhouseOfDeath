@@ -2,8 +2,10 @@
 using System.Collections;
 
 public class Trampoline : MonoBehaviour {
-    public float timer = 0.0f;
-    public float despawnTime = 2.0f;
+
+    public bool tempTramp = true;
+    public bool bounceUp = true;
+
 	// Use this for initialization
 	void Start () {
 	
@@ -11,9 +13,14 @@ public class Trampoline : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        timer += Time.deltaTime;
-        if (timer >= despawnTime) {
+        
+	}
+
+    void OnCollisionEnter2D(Collision2D colliInfo)
+    {
+        if (colliInfo.gameObject.tag == "Player" && tempTramp)
+        {
             Destroy(gameObject);
         }
-	}
+    }
 }

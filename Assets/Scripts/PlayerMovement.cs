@@ -3,10 +3,15 @@ using System.Collections;
 using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour {
-
+    
     public float speed = 10.0f;
-    public float jumpForce = 10.0f;
+    public float jumpForce = 300.0f;
+
     public float bounceForce = 1000.0f;
+    public float maxBounceForce = 1500.0f;
+    public float bForceMod = 10.0f;
+    public float yBounceForce;
+
     public bool crushing = false;
     public bool trampJump = false;
     public bool touchingGround = true;
@@ -56,8 +61,8 @@ public class PlayerMovement : MonoBehaviour {
             {
                 gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce), ForceMode2D.Force);
             }
-        } 
-            
+        }
+        yBounceForce = gameObject.GetComponent<Rigidbody2D>().velocity.y * bForceMod;
     }
 
     void OnCollisionEnter2D(Collision2D colliInfo) {
@@ -72,8 +77,27 @@ public class PlayerMovement : MonoBehaviour {
             touchingGround = false;
             trampJump = true;
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
-            gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, bounceForce), ForceMode2D.Force);
-            Destroy(GameObject.FindGameObjectWithTag("Trampoline"));
+            
+            if (colliInfo.gameObject.GetComponent<Trampoline>().bounceUp)
+            {
+                float force = -yBounceForce + bounceForce;
+                if (force >= maxBounceForce) {
+                    force = maxBounceForce;
+                }
+                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -yBounceForce + bounceForce), ForceMode2D.Force);
+            }
+            else
+            {
+                float force = -(yBounceForce + bounceForce);
+                if (force >= maxBounceForce)
+                {
+                    force = maxBounceForce;
+                }
+                gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(0, -(yBounceForce + bounceForce)), ForceMode2D.Force);
+            }
+            if (colliInfo.gameObject.GetComponent<Trampoline>().tempTramp) {
+                Destroy(colliInfo.gameObject);
+            }
         }
         if (colliInfo.gameObject.tag == "Enemy") {
             SceneManager.LoadScene("GameOver");
@@ -83,6 +107,18 @@ public class PlayerMovement : MonoBehaviour {
             if (touchingGround) {
                 SceneManager.LoadScene("GameOver");
             }
+        }
+        if (colliInfo.gameObject.tag == "TrampPower")
+        {
+            LockPowers.TrampolineUnlocked = true;
+        }
+        if (colliInfo.gameObject.tag == "BalloonPower")
+        {
+            LockPowers.BalloonUnlocked = true;
+        }
+        if (colliInfo.gameObject.tag == "AirBlastPower")
+        {
+            LockPowers.AirBlastUnlocked = true;
         }
         gameObject.GetComponent<Balloon>().balloonOut = false;
     }
