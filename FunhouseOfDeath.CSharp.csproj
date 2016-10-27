@@ -71,10 +71,12 @@
     <Compile Include="Assets\Scripts\CrushingBlock.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\LockPowers.cs" />
+    <Compile Include="Assets\Scripts\ObjectSpawner.cs" />
     <Compile Include="Assets\Scripts\PlayerAnimation.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
     <Compile Include="Assets\Scripts\Respawn.cs" />
     <Compile Include="Assets\Scripts\ShootTrampoline.cs" />
+    <Compile Include="Assets\Scripts\SoulOfDeath.cs" />
     <Compile Include="Assets\Scripts\Trampoline.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\SyntaxTree\UnityVS\2015\UnityVS.CSharp.targets" />
