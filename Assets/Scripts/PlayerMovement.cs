@@ -51,9 +51,7 @@ public class PlayerMovement : MonoBehaviour {
             {
                 gameObject.transform.Translate(new Vector3(-speed * Time.deltaTime, 0, 0));
             }
-            else
-            {
-            }
+         
             if (!(touchingGround))
             {
             }
@@ -68,16 +66,17 @@ public class PlayerMovement : MonoBehaviour {
     void OnCollisionEnter2D(Collision2D colliInfo) {
         if (colliInfo.gameObject.tag == "Ground") {
             if (crushing) {
-                SceneManager.LoadScene("GameOver");
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death();
             }
             touchingGround = true;
             trampJump = false;
         }
-        if (colliInfo.gameObject.tag == "Trampoline") {
+        if (colliInfo.gameObject.tag == "Trampoline" || colliInfo.gameObject.tag == "PermaTramp") {
             touchingGround = false;
-            trampJump = true;
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
-            
+            if (colliInfo.gameObject.tag == "Trampoline") {
+                trampJump = true;
+            }
             if (colliInfo.gameObject.GetComponent<Trampoline>().bounceUp)
             {
                 float force = -yBounceForce + bounceForce;
@@ -100,14 +99,14 @@ public class PlayerMovement : MonoBehaviour {
             }
         }
         if (colliInfo.gameObject.tag == "Enemy") {
-            SceneManager.LoadScene("GameOver");
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death();
         }
         if (colliInfo.gameObject.tag == "Crush") {
             crushing = true;
             if (touchingGround) {
-                SceneManager.LoadScene("GameOver");
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death();
             }
-        }
+        }/*
         if (colliInfo.gameObject.tag == "TrampPower")
         {
             LockPowers.TrampolineUnlocked = true;
@@ -119,7 +118,7 @@ public class PlayerMovement : MonoBehaviour {
         if (colliInfo.gameObject.tag == "AirBlastPower")
         {
             LockPowers.AirBlastUnlocked = true;
-        }
+        }*/
         gameObject.GetComponent<Balloon>().balloonOut = false;
     }
 

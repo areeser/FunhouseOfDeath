@@ -20,6 +20,17 @@ public class GameManager : MonoBehaviour {
     }
 
     public void Death() {
+        if (scene == "AirBlast") {
+            LockPowers.AirBlastUnlocked = false;
+        }
+        else if (scene == "Balloon")
+        {
+            LockPowers.BalloonUnlocked = false;
+        }
+        else if (scene == "Trampoline")
+        {
+            LockPowers.TrampolineUnlocked = false;
+        }
         SceneManager.LoadScene("GameOver");
     }
 }
