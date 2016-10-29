@@ -11,15 +11,16 @@ public class ShootTrampoline : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
+        float yOffset = -0.25f;
         if (LockPowers.TrampolineUnlocked && Input.GetMouseButtonDown(0) && (!gameObject.GetComponent<PlayerMovement>().trampJump)) {
             Destroy(GameObject.FindGameObjectWithTag("Trampoline"));
             Vector3 vect = gameObject.transform.position;
             if (gameObject.GetComponent<PlayerMovement>().facingRight)
             {
-                vect += new Vector3(initPos, 0, 0);
+                vect += new Vector3(initPos, yOffset, 0);
             }
             else {
-                vect += new Vector3(-initPos, 0, 0);
+                vect += new Vector3(-initPos, yOffset, 0);
             }
             Instantiate(tramp, vect, new Quaternion());    
         }
