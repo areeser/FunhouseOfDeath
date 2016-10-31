@@ -64,6 +64,10 @@ public class PlayerMovement : MonoBehaviour {
     }
 
     void OnCollisionEnter2D(Collision2D colliInfo) {
+        if (colliInfo.gameObject.tag == "DeathBlinker")
+        {
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death();
+        }
         if (colliInfo.gameObject.tag == "Ground") {
             if (crushing) {
                 GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death();
