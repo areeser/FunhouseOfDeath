@@ -14,7 +14,11 @@ public class CameraMovement : MonoBehaviour {
     public Vector3 point0 = new Vector3(20.3f, 9.9f, -22);
     public Vector3 point1 = new Vector3(64.1f, 18.5f, -13);
     public Vector3 point2 = new Vector3(110.1f, 26.5f,-23);
-   
+    public Vector3 point3 = new Vector3(110.1f, 26.5f, -23);
+    public Vector3 point4 = new Vector3(110.1f, 26.5f, -23);
+    public Vector3 point5 = new Vector3(110.1f, 26.5f, -23);
+    public Vector3 point6 = new Vector3(110.1f, 26.5f, -23);
+
     // Use this for initialization
     void Start () {
         cam = gameObject.GetComponent<Camera>();
@@ -62,5 +66,38 @@ public class CameraMovement : MonoBehaviour {
                 canChange = true;
             }
         }
+        if (points == 3)
+        {
+            gameObject.transform.Translate((point3 - gameObject.transform.position) * Time.deltaTime * transitionSpeed);
+            if ((point3 - gameObject.transform.position).magnitude < changable)
+            {
+                canChange = true;
+            }
+        }
+        if (points == 4)
+        {
+            gameObject.transform.Translate((point4 - gameObject.transform.position) * Time.deltaTime * transitionSpeed);
+            if ((point4 - gameObject.transform.position).magnitude < changable)
+            {
+                canChange = true;
+            }
+        }
+        if (points == 5)
+        {
+            gameObject.transform.Translate((point5 - gameObject.transform.position) * Time.deltaTime * transitionSpeed);
+            if ((point5 - gameObject.transform.position).magnitude < changable)
+            {
+                canChange = true;
+            }
+        }
+        if (points == 6)
+        {
+            gameObject.transform.Translate((point6 - gameObject.transform.position) * Time.deltaTime * transitionSpeed);
+            if ((point6 - gameObject.transform.position).magnitude < changable)
+            {
+                canChange = true;
+            }
+        }
+        
     }
 }
