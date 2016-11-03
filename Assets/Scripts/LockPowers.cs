@@ -5,7 +5,7 @@ public class LockPowers : MonoBehaviour {
     public static bool AirBlastUnlocked = false;
     public static bool TrampolineUnlocked = false;
     public static bool BalloonUnlocked = false;
-    private bool unlockPowers = false; 
+    public bool unlockPowers = false; 
 	// Use this for initialization
 	void Start () {
        // unlockPowers = true;
