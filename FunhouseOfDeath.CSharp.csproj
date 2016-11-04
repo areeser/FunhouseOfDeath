@@ -70,6 +70,7 @@
     <Compile Include="Assets\Scripts\CreateIWall.cs" />
     <Compile Include="Assets\Scripts\CrushingBlock.cs" />
     <Compile Include="Assets\Scripts\DestroyOnCollision.cs" />
+    <Compile Include="Assets\Scripts\DisappearAfterTime.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\GlobalSwitcher.cs" />
     <Compile Include="Assets\Scripts\LevelEnd.cs" />

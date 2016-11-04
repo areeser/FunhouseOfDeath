@@ -1,10 +1,11 @@
 fileFormatVersion: 2
 guid: 6ec0096afb0c0d9448d597eb917d3802
-timeCreated: 1476041757
+timeCreated: 1478205208
 licenseType: Free
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - Confetti: {fileID: 1000012352588970, guid: 6ce858285ac3dac409536920a8ff613a, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
