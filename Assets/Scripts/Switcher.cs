@@ -6,7 +6,8 @@ public class Switcher : MonoBehaviour {
 
     public float timeCounter;
     public bool isActive = true;
-    public int secondDelay = 3;
+    public float activeTime = 3.0f;
+    public float inactiveTime = 3.0f;
 	// Use this for initialization
 	void Start () {
     
@@ -14,18 +15,19 @@ public class Switcher : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-        timeCounter = Time.time % (2 * secondDelay);
-        if (timeCounter <= secondDelay)
+        timeCounter += Time.deltaTime;
+        if (timeCounter <= activeTime)
         {
             gameObject.GetComponent<Renderer>().enabled = true;
             gameObject.GetComponent<BoxCollider2D>().enabled = true;
         }
-        if (timeCounter > secondDelay)
-        {
+        else {
             gameObject.GetComponent<Renderer>().enabled = false;
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             isActive = false;
+            if (timeCounter >= activeTime + inactiveTime) {
+                timeCounter = 0;
+            }
         }
-	
 	}
 }

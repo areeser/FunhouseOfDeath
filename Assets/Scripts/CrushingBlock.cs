@@ -3,7 +3,9 @@ using System.Collections;
 
 public class CrushingBlock : MonoBehaviour {
     public bool up = true;
-    public int screenPoint = 0;
+    public bool stop = false;
+    public int screenPointOne = 0;
+    public int screenPointTwo = 0;
     public float speed = 10.0f;
     public Camera cam;
 	// Use this for initialization
@@ -16,8 +18,19 @@ public class CrushingBlock : MonoBehaviour {
 
     // Update is called once per frame
     void Update() {
-        if (screenPoint == cam.GetComponent<CameraMovement>().points) {
+        int points = cam.GetComponent<CameraMovement>().points;
+        if (screenPointOne <= points && screenPointTwo >= points && !(stop)) {
             gameObject.transform.Translate(0, speed * Time.deltaTime, 0);
         }
 	}
+
+    void OnCollisionEnter2D(Collision2D colliInfo) {
+        if (colliInfo.gameObject.tag == "Ground")
+        {
+            stop = true;
+        }
+        if (colliInfo.gameObject.tag == "Crush") {
+            stop = true;
+        }
+    }
 }

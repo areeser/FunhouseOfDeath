@@ -8,7 +8,7 @@ public class LockPowers : MonoBehaviour {
     public bool unlockPowers = false; 
 	// Use this for initialization
 	void Start () {
-       // unlockPowers = true;
+        //unlockPowers = true;
         if (unlockPowers)
         {
             AirBlastUnlocked = true;
