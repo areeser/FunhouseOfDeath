@@ -22,9 +22,13 @@ public class PlayerMovement : MonoBehaviour {
     public double mousePos;
     public Camera cam;
 
+    public Vector3 CheckPointPos = new Vector3(0, 0, 0);
     // Use this for initialization
     void Start() {
         cam = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        if (GameManager.checkPoint) {
+            gameObject.transform.position = CheckPointPos;
+        }
     }
 
     // Update is called once per frame

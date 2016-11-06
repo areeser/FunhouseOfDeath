@@ -66,6 +66,7 @@
     <Compile Include="Assets\Scripts\AirBlast.cs" />
     <Compile Include="Assets\Scripts\Balloon.cs" />
     <Compile Include="Assets\Scripts\CameraMovement.cs" />
+    <Compile Include="Assets\Scripts\Checkpoint.cs" />
     <Compile Include="Assets\Scripts\ClickLevel.cs" />
     <Compile Include="Assets\Scripts\CreateIWall.cs" />
     <Compile Include="Assets\Scripts\CrushingBlock.cs" />

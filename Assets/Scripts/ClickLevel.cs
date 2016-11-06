@@ -16,6 +16,7 @@ public class ClickLevel : MonoBehaviour {
 	}
 
     void OnMouseUpAsButton() {
+        GameManager.checkPoint = false;
         GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().ChangeScene(toLevel);
     }
 }
