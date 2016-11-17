@@ -16,6 +16,7 @@ public class PlayerMovement : MonoBehaviour {
     public bool trampJump = false;
     public bool touchingGround = true;
     public bool facingRight;
+    public bool canMove = true;
     public Collision2D ColliInfo;
     public Vector2 vect;
     public Vector2 playerPosition;
@@ -35,8 +36,8 @@ public class PlayerMovement : MonoBehaviour {
     void Update() {
         playerPosition = cam.WorldToViewportPoint(GameObject.FindGameObjectWithTag("Player").transform.position);
         mousePos = Input.mousePosition.x / cam.pixelWidth;
-
-        if (gameObject.GetComponent<Balloon>().balloonOut == false)
+        
+        if (canMove)
         {
             if (playerPosition.x - mousePos >= 0)
             {
@@ -80,6 +81,9 @@ public class PlayerMovement : MonoBehaviour {
             trampJump = false;
         }
         if (colliInfo.gameObject.tag == "Trampoline" || colliInfo.gameObject.tag == "PermaTramp") {
+            if (colliInfo.gameObject.tag == "PermaTramp") {
+                trampJump = false;
+            }
             touchingGround = false;
             gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
             if (colliInfo.gameObject.tag == "Trampoline") {
