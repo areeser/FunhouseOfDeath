@@ -5,6 +5,9 @@ public class LockPowers : MonoBehaviour {
     public static bool AirBlastUnlocked = false;
     public static bool TrampolineUnlocked = false;
     public static bool BalloonUnlocked = false;
+    public bool ab;
+    public bool tramp;
+    public bool balloon;
     public bool unlockPowers = false; 
 	// Use this for initialization
 	void Start () {
@@ -19,6 +22,8 @@ public class LockPowers : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-	
+        ab = AirBlastUnlocked;
+        tramp = TrampolineUnlocked;
+        balloon = BalloonUnlocked;
 	}
 }

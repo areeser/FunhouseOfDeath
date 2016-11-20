@@ -23,15 +23,11 @@ public class CameraMovement : MonoBehaviour {
     public Vector3 point9 = new Vector3(110.1f, 26.5f, -23);
     public Vector3 point10 = new Vector3(110.1f, 26.5f, -23);
 
-    public int checkPointScreen = 0;
-    public Vector3 checkPointPos = new Vector3(0, 0, 0);
+
     // Use this for initialization
     void Start () {
         cam = gameObject.GetComponent<Camera>();
-        if (GameManager.checkPoint) {
-            points = checkPointScreen;
-            gameObject.transform.position = checkPointPos;
-        }
+        
     }
 
     // Update is called once per frame

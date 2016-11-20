@@ -49,17 +49,21 @@ public class AirBlast : MonoBehaviour {
             facingRight = gameObject.GetComponent<PlayerMovement>().facingRight;
             if (!blast)
             {
-                if (facingRight && Input.GetMouseButtonDown(1))
+                if (Input.GetMouseButtonDown(1))
                 {
-					generateConfetti(true);
-                    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-airBlastForce, 0), ForceMode2D.Force);
-                    blast = true;
-                }
-                else if (!facingRight && Input.GetMouseButtonDown(1))
-                {
-					generateConfetti(false);
-                    blast = true;
-                    gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(airBlastForce, 0), ForceMode2D.Force);
+                    gameObject.GetComponent<PlayerMovement>().canMove = false;
+                    if (facingRight)
+                    {
+                        generateConfetti(true);
+                        gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(-airBlastForce, 0), ForceMode2D.Force);
+                        blast = true;
+                    }
+                    else if (!facingRight)
+                    {
+                        generateConfetti(false);
+                        blast = true;
+                        gameObject.GetComponent<Rigidbody2D>().AddForce(new Vector2(airBlastForce, 0), ForceMode2D.Force);
+                    }
                 }
             }
             else
@@ -67,12 +71,14 @@ public class AirBlast : MonoBehaviour {
                 timer += Time.deltaTime;
                 if (timer >= boostTime)
                 {
+                    gameObject.GetComponent<PlayerMovement>().canMove = true;
                     gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, gameObject.GetComponent<Rigidbody2D>().velocity.y);
                     blast = false;
                     timer = 0;
                 }
                 else if (Input.GetMouseButtonUp(1))
                 {
+                    gameObject.GetComponent<PlayerMovement>().canMove = true;
                     gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2(0.0f, 0.0f);
                 }
             }

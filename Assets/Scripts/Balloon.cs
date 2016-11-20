@@ -16,10 +16,12 @@ public class Balloon : MonoBehaviour {
             if ((Input.GetKeyDown(KeyCode.Q) || Input.GetKeyDown(KeyCode.Alpha2) || Input.GetKeyDown(KeyCode.LeftShift)) && gameObject.GetComponent<PlayerMovement>().touchingGround)
             {
                 balloonOut = true;
+                gameObject.GetComponent<PlayerMovement>().canMove = false;
             }
             else if (Input.GetKeyUp(KeyCode.Q) || Input.GetKeyUp(KeyCode.Alpha2) || Input.GetKeyUp(KeyCode.LeftShift))
             {
                 balloonOut = false;
+                gameObject.GetComponent<PlayerMovement>().canMove = true;
             }
             if (balloonOut)
             {
