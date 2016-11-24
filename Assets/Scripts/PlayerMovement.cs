@@ -64,18 +64,29 @@ public class PlayerMovement : MonoBehaviour {
         yBounceForce = gameObject.GetComponent<Rigidbody2D>().velocity.y * bForceMod;
     }
 
-    void OnCollisionEnter2D(Collision2D colliInfo) {
-        if (colliInfo.gameObject.tag == "DeathBlinker")
-        {
-            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death();
-        }
+    void OnCollisionStay2D(Collision2D colliInfo) {
         if (colliInfo.gameObject.tag == "Ground") {
-            if (crushing) {
+            if (crushing)
+            {
                 GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death();
             }
             touchingGround = true;
             trampJump = false;
         }
+    }
+
+    void OnCollisionEnter2D(Collision2D colliInfo) {
+        if (colliInfo.gameObject.tag == "DeathBlinker")
+        {
+            GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death();
+        }
+        /*if (colliInfo.gameObject.tag == "Ground") {
+            if (crushing) {
+                GameObject.FindGameObjectWithTag("GameManager").GetComponent<GameManager>().Death();
+            }
+            touchingGround = true;
+            trampJump = false;
+        }*/
         if (colliInfo.gameObject.tag == "Trampoline" || colliInfo.gameObject.tag == "PermaTramp") {
             if (colliInfo.gameObject.tag == "PermaTramp") {
                 trampJump = false;
