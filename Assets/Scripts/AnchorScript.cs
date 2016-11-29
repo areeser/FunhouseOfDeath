@@ -20,31 +20,33 @@ public class AnchorScript : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         timeElapsed += Time.deltaTime;
-        Vector3 positonToSpawn = new Vector3(gameObject.transform.position.x + (10 * (1 + numberOfPlatformsSpawned)), gameObject.transform.position.y);
+        Vector3 positionToSpawn = new Vector3(gameObject.transform.position.x + (10 * gameObject.transform.localScale.x * (1 + numberOfPlatformsSpawned)), gameObject.transform.position.y);
         if (!direction)
         {
-            positonToSpawn = new Vector3(gameObject.transform.position.x - (10 * (1 + numberOfPlatformsSpawned)), gameObject.transform.position.y);
+            positionToSpawn = new Vector3(gameObject.transform.position.x - (10 * gameObject.transform.localScale.x * (1 + numberOfPlatformsSpawned)), gameObject.transform.position.y);
         }
-        if (timeElapsed < anchorActiveTime)
+        if (timeElapsed <= anchorActiveTime)
         {
             gameObject.GetComponent<Renderer>().enabled = true;
             gameObject.GetComponent<BoxCollider2D>().enabled = true;
             anchorActive = true;
         }
-        if (timeElapsed < anchorActiveTime + anchorInactiveTime && timeElapsed >= anchorActiveTime - 1)
+        if (timeElapsed > anchorActiveTime)
         {
             gameObject.GetComponent<Renderer>().enabled = false;
             gameObject.GetComponent<BoxCollider2D>().enabled = false;
             anchorActive = false;
         }
-        if (timeElapsed >= anchorActiveTime + anchorInactiveTime && numberOfPlatformsToSpawn == numberOfPlatformsSpawned)
+        if (timeElapsed >= anchorActiveTime + anchorInactiveTime)
         {
             timeElapsed = 0.0f;
             numberOfPlatformsSpawned = 0;
         }
-        if (numberOfPlatformsSpawned < numberOfPlatformsToSpawn && timeElapsed % anchorActiveTime > numberOfPlatformsSpawned + 1)
+        if (numberOfPlatformsSpawned < numberOfPlatformsToSpawn && timeElapsed >= timeUntilNextPlatform + timeUntilNextPlatform * numberOfPlatformsSpawned)//timeElapsed % anchorActiveTime > numberOfPlatformsSpawned + 1)
         {
-            Instantiate(CascadingPlatform, positonToSpawn, new Quaternion());
+            GameObject o = Instantiate(CascadingPlatform, positionToSpawn, new Quaternion()) as GameObject;
+            o.transform.parent = gameObject.transform;
+            o.GetComponent<CascadingPlatform>().despawnTime = anchorActiveTime;
             numberOfPlatformsSpawned++;
         }
         

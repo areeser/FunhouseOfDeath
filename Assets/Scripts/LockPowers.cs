@@ -8,7 +8,7 @@ public class LockPowers : MonoBehaviour {
     public bool ab;
     public bool tramp;
     public bool balloon;
-    public bool unlockPowers = false; 
+    private bool unlockPowers = false; 
 	// Use this for initialization
 	void Start () {
         //unlockPowers = true;
