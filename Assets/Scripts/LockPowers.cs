@@ -12,6 +12,7 @@ public class LockPowers : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
         //unlockPowers = true;
+        //DontDestroyOnLoad(this);
         if (unlockPowers)
         {
             AirBlastUnlocked = true;
